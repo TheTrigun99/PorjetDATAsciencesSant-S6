@@ -1,15 +1,13 @@
 library(gliomaData)
 library(RGCCA)
 library(caret)
-# 3. Charger les données
 data("ge_cgh_locIGR", package = "gliomaData")
-# 4. Préparer les blocs
 blocks <- ge_cgh_locIGR$multiblocks
 Loc <- factor(ge_cgh_locIGR$y)
 levels(Loc) <- colnames(ge_cgh_locIGR$multiblocks$y)
-blocks[[3]] <- Loc  # Le bloc 3 devient la variable de localisation (cible)
+blocks[[3]] <- Loc  
 
-# 5. Vérifier le nombre de colonnes dans chaque bloc
+
 vapply(blocks, NCOL, FUN.VALUE = 1L)
 fit.sgcca <- rgcca(blocks = blocks, response = 3, ncomp = 2,sparsity = c(0.2, 0.2000, 1),verbose = FALSE,method='sgcca')
 summary(fit.sgcca)
@@ -57,3 +55,4 @@ ggplot(df, aes(x = Loc, y = Variable, fill = Loc)) +
   geom_boxplot() +
   labs(title = paste("Distribution de", var_name, "selon la localisation"),
        x = "Localisation", y = "Valeur")é
+
