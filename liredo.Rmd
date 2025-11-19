@@ -1,9 +1,0 @@
-```{r}
-library(gliomaData)
-data(CGH_annot)
-
-# Afficher les dimensions
-print(dim(CGH_annot))
-
-# Résumé des données
-print(summary(CGH_annot))
